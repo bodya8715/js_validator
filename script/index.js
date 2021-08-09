@@ -13,8 +13,8 @@ class RangeValidator {
             throw new TypeError("Not a number");
         }
 
-        if (number > this.to && typeof this.to !== 'undefined' ) {
-            throw new RangeError('Число не входит в диапазон');
+        if ( typeof this.to !== 'undefined' && number > this.to ) {
+            throw new RangeError('Число "from" больше "to');
         }
         
         this._from = number;
@@ -31,33 +31,27 @@ class RangeValidator {
         }
 
         if (number < this.from) {
-            throw new RangeError('Число не входит в диапазон');
+            throw new RangeError('Число "to" меньше "from"');
         }
 
         this._to = number;
     }
 
     getterRange() {
-        return [].push(this.from, this.to);
+        let result = [];
+        result.push(this.from, this.to);
+        return result;
     }
 
-    // validate(number) {
-    //     if (isNaN(number) || typeof number !== 'number') {
-    //         throw new TypeError("Not a number");
-    //     }
-
-    //     if ((number >= this.from) && (number <= this.to)) {
-    //         return number;
-    //     } else {
-    //         throw new RangeError('Число не входит в диапазон');
-    //     }
-    // }
+    validate(number) {
+        if( number >= this.from && number <= this.to ) {
+            return number;
+        }
+        
+        throw new RangeError("Число не входит в указанный диапазон");
+    }
 }
 
-function compare(num1, num2) {
-
-}
-
-let objectWithNumbers = new RangeValidator(5,3);
+let objectWithNumbers = new RangeValidator(3,5);
 
 console.log(objectWithNumbers);

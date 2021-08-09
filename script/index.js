@@ -38,12 +38,13 @@ class RangeValidator {
     }
 
     get range() {
-        let result = [];
-        result.push(this.from, this.to);
-        return result;
+        return [this.from, this.to];
     }
 
     validate(number) {
+        if ( isNaN(number) || typeof number !== 'number' ) {
+            throw TypeError('Not a number');
+        }
         if( number >= this.from && number <= this.to ) {
             return number;
         }

@@ -37,7 +37,7 @@ class RangeValidator {
         this._to = number;
     }
 
-    getterRange() {
+    get range() {
         let result = [];
         result.push(this.from, this.to);
         return result;
